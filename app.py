@@ -15,9 +15,13 @@ def home():
 
 @app.route("/nova", methods=["POST"])
 def nova():
-    nome = request.form["nome"]
+    nome = request.form["nome"].strip()
+    if not nome:
+        return redirect(url_for("home"))
+
     _id = criar_confraternizacao(nome)
     return redirect(url_for("ver_confraternizacao", cid=_id))
+
 
 @app.route("/c/<int:cid>")
 def ver_confraternizacao(cid):
