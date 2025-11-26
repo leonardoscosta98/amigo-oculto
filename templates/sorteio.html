@@ -18,7 +18,7 @@
     <div class="alert alert-success">
         <h4>🎁 Você tirou: <strong>{{ amigo.nome }}</strong></h4>
     </div>
-{% else %}
+{% elif not erro %}
     <div class="alert alert-danger">
         <h4>❌ Você já visualizou seu amigo oculto anteriormente!</h4>
     </div>
