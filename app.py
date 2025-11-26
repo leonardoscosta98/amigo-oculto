@@ -2,7 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for
 from models import (
     listar_confraternizacoes, criar_confraternizacao,
     listar_participantes, cadastrar_participante,
-    get_participante, participantes_disponiveis, atualizar_sorteio
+    get_participante, participantes_disponiveis, atualizar_sorteio,
+    editar_confraternizacao
 )
 import random
 
@@ -32,10 +33,17 @@ def add_participante(cid):
     cadastrar_participante(nome, cid)
     return redirect(url_for("ver_confraternizacao", cid=cid))
 
+@app.route("/c/<int:cid>/editar", methods=["POST"])
+def editar(cid):
+    novo_nome = request.form["nome"]
+    editar_confraternizacao(cid, novo_nome)
+    return redirect(url_for("home"))
+
 @app.route("/sorteio/<int:pid>")
 def sorteio(pid):
     p = get_participante(pid)
 
+    # Já sorteou → não mostrar botão novamente
     if p["ja_sorteou"]:
         return render_template("sorteio.html", participante=p, amigo=None)
 
