@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3>Confraternização</h3>
+
+<form method="POST" action="/c/{{cid}}/add" class="d-flex gap-2">
+    <input name="nome" class="form-control" placeholder="Nome do participante">
+    <button class="btn btn-success">Adicionar</button>
+</form>
+
+<hr>
+
+<h4>Participantes</h4>
+<ul class="list-group">
+{% for p in participantes %}
+    <li class="list-group-item d-flex justify-content-between">
+        {{ p.nome }}
+        <a class="btn btn-primary btn-sm" href="/sorteio/{{p.id}}">Sortear</a>
+    </li>
+{% endfor %}
+</ul>
+
+{% endblock %}

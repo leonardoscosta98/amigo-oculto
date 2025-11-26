@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3>Confraternizações</h3>
+
+<form method="POST" action="/nova" class="d-flex gap-2">
+    <input name="nome" class="form-control" placeholder="Nome da confraternização">
+    <button class="btn btn-primary">Criar</button>
+</form>
+
+<hr>
+
+<ul class="list-group">
+{% for c in lista %}
+    <li class="list-group-item d-flex justify-content-between">
+        {{ c.nome }}
+        <a class="btn btn-sm btn-success" href="/c/{{c.id}}">Abrir</a>
+    </li>
+{% endfor %}
+</ul>
+
+{% endblock %}

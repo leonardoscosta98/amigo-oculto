@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3>Sorteio de {{ participante.nome }}</h3>
+
+{% if amigo %}
+    <div class="alert alert-success">
+        <h4>🎁 Você tirou: <strong>{{ amigo.nome }}</strong></h4>
+    </div>
+{% else %}
+    <div class="alert alert-danger">
+        <h4>❌ Você já visualizou seu amigo oculto anteriormente!</h4>
+    </div>
+{% endif %}
+
+<a class="btn btn-secondary mt-3" href="/">Voltar</a>
+
+{% endblock %}
