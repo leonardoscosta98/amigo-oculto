@@ -25,12 +25,7 @@
 {% for p in participantes %}
     <li class="list-group-item d-flex justify-content-between">
         {{ p.nome }}
-
-        {% if not p.ja_sorteou %}
-            <a class="btn btn-primary btn-sm" href="/sorteio/{{p.id}}">Sortear</a>
-        {% else %}
-            <span class="badge bg-secondary">Já sorteou</span>
-        {% endif %}
+        <a class="btn btn-primary btn-sm" href="/sorteio/{{p.id}}">Sortear</a>
     </li>
 {% endfor %}
 </ul>
