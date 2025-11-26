@@ -72,3 +72,11 @@ def participantes_disponiveis(cid, pid):
     data = cur.fetchall()
     conn.close()
     return data
+
+def editar_confraternizacao(cid, novo_nome):
+    conn = get_conn()
+    cur = conn.cursor()
+    cur.execute("UPDATE confraternizacoes SET nome=%s WHERE id=%s", (novo_nome, cid))
+    conn.commit()
+    conn.close()
+
