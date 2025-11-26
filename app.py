@@ -45,14 +45,15 @@ def editar(cid):
 @app.route("/sorteio/<int:pid>")
 def sorteio(pid):
     p = get_participante(pid)
+    cid = p["confraternizacao_id"]
 
-    # Já sorteou → não mostrar botão novamente
     if p["ja_sorteou"]:
-        return render_template("sorteio.html", participante=p, amigo=None)
+        return render_template("sorteio.html", participante=p, amigo=None, cid=cid)
 
-    disponiveis = participantes_disponiveis(p["confraternizacao_id"], pid)
+    disponiveis = participantes_disponiveis(cid, pid)
 
     amigo = random.choice(disponiveis)
     atualizar_sorteio(pid, amigo["id"])
 
-    return render_template("sorteio.html", participante=p, amigo=amigo)
+    return render_template("sorteio.html", participante=p, amigo=amigo, cid=cid)
+
