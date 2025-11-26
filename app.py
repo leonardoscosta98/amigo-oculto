@@ -3,7 +3,7 @@ from models import (
     listar_confraternizacoes, criar_confraternizacao,
     listar_participantes, cadastrar_participante,
     get_participante, participantes_disponiveis, atualizar_sorteio,
-    editar_confraternizacao
+    editar_confraternizacao, get_confraternizacao
 )
 import random
 
@@ -21,11 +21,14 @@ def nova():
 
 @app.route("/c/<int:cid>")
 def ver_confraternizacao(cid):
+    conf = get_confraternizacao(cid)
     return render_template(
         "confraternizacao.html",
         cid=cid,
+        conf=conf,
         participantes=listar_participantes(cid)
     )
+
 
 @app.route("/c/<int:cid>/add", methods=["POST"])
 def add_participante(cid):
