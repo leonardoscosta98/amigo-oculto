@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h3>{{ conf.nome }}</h3>
+<div class="d-flex align-items-center mb-3">
+    <a class="btn btn-secondary btn-sm me-3" href="/">
+        <i class="bi bi-arrow-left"></i> Voltar
+    </a>
+    <h3 class="m-0">{{ conf.nome }}</h3>
+</div>
 
 <form method="POST" action="/c/{{cid}}/editar" class="d-flex gap-2 mb-3">
     <input name="nome" class="form-control" placeholder="Renomear confraternização" value="{{ conf.nome }}">
@@ -29,7 +34,5 @@
     </li>
 {% endfor %}
 </ul>
-
-<a class="btn btn-secondary mt-3" href="/">Voltar</a>
 
 {% endblock %}
