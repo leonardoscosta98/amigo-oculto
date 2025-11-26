@@ -80,3 +80,13 @@ def editar_confraternizacao(cid, novo_nome):
     conn.commit()
     conn.close()
 
+
+def get_confraternizacao(cid):
+    conn = get_conn()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM confraternizacoes WHERE id=%s", (cid,))
+    data = cur.fetchone()
+    conn.close()
+    return data
+
+
