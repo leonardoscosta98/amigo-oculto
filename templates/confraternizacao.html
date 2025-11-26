@@ -3,6 +3,11 @@
 
 <h3>Confraternização</h3>
 
+<form method="POST" action="/c/{{cid}}/editar" class="d-flex gap-2 mb-3">
+    <input name="nome" class="form-control" placeholder="Renomear confraternização">
+    <button class="btn btn-warning">Salvar</button>
+</form>
+
 <form method="POST" action="/c/{{cid}}/add" class="d-flex gap-2">
     <input name="nome" class="form-control" placeholder="Nome do participante">
     <button class="btn btn-success">Adicionar</button>
@@ -15,9 +20,16 @@
 {% for p in participantes %}
     <li class="list-group-item d-flex justify-content-between">
         {{ p.nome }}
-        <a class="btn btn-primary btn-sm" href="/sorteio/{{p.id}}">Sortear</a>
+
+        {% if not p.ja_sorteou %}
+            <a class="btn btn-primary btn-sm" href="/sorteio/{{p.id}}">Sortear</a>
+        {% else %}
+            <span class="badge bg-secondary">Já sorteou</span>
+        {% endif %}
     </li>
 {% endfor %}
 </ul>
+
+<a class="btn btn-secondary mt-3" href="/">Voltar</a>
 
 {% endblock %}
