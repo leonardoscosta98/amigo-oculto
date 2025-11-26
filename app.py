@@ -53,13 +53,13 @@ def sorteio(pid):
     disponiveis = participantes_disponiveis(cid, pid)
 
     if len(disponiveis) == 0:
-    return render_template(
-        "sorteio.html",
-        participante=p,
-        amigo=None,
-        cid=cid,
-        erro="Não há mais participantes disponíveis para sortear."
-    )
+        return render_template(
+            "sorteio.html",
+            participante=p,
+            amigo=None,
+            cid=cid,
+            erro="Não há mais participantes disponíveis para sortear."
+        )
 
     amigo = random.choice(disponiveis)
     atualizar_sorteio(pid, amigo["id"])
