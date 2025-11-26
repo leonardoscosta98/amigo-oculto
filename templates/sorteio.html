@@ -8,6 +8,12 @@
     <h3 class="m-0">{{ participante.nome }}</h3>
 </div>
 
+{% if erro %}
+<div class="alert alert-danger">
+    {{ erro }}
+</div>
+{% endif %}
+
 {% if amigo %}
     <div class="alert alert-success">
         <h4>🎁 Você tirou: <strong>{{ amigo.nome }}</strong></h4>
