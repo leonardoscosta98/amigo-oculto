@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h3>Confraternização</h3>
+<h3>{{ conf.nome }}</h3>
 
 <form method="POST" action="/c/{{cid}}/editar" class="d-flex gap-2 mb-3">
-    <input name="nome" class="form-control" placeholder="Renomear confraternização">
+    <input name="nome" class="form-control" placeholder="Renomear confraternização" value="{{ conf.nome }}">
     <button class="btn btn-warning">Salvar</button>
 </form>
 
