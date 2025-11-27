@@ -3,7 +3,7 @@ from models import (
     listar_confraternizacoes, criar_confraternizacao,
     listar_participantes, cadastrar_participante,
     get_participante, participantes_disponiveis, atualizar_sorteio,
-    editar_confraternizacao, get_confraternizacao
+    editar_confraternizacao, get_confraternizacao, quem_tirou
 )
 import random
 
