@@ -56,6 +56,10 @@ def sorteio(pid):
 
     disponiveis = participantes_disponiveis(cid, pid)
 
+    pessoa_que_tirou_ele = quem_tirou(pid)
+    if pessoa_que_tirou_ele:
+        disponiveis = [d for d in disponiveis if d["id"] != pessoa_que_tirou_ele]
+
     if len(disponiveis) == 0:
         return render_template(
             "sorteio.html",
@@ -69,4 +73,5 @@ def sorteio(pid):
     atualizar_sorteio(pid, amigo["id"])
 
     return render_template("sorteio.html", participante=p, amigo=amigo, cid=cid)
+
 
