@@ -92,8 +92,13 @@ def get_confraternizacao(cid):
 def quem_tirou(pid):
     conn = get_conn()
     cur = conn.cursor()
-    cur.execute("SELECT id FROM participantes WHERE amigo_id = %s", (pid,))
-    result = cur.fetchone()
+    cur.execute("""
+        SELECT id 
+        FROM participantes
+        WHERE amigo_id = %s
+    """, (pid,))
+    row = cur.fetchone()
     conn.close()
-    return result[0] if result else None
+    return row["id"] if row else None
+
 
