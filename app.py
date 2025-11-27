@@ -3,7 +3,7 @@ from models import (
     listar_confraternizacoes, criar_confraternizacao,
     listar_participantes, cadastrar_participante,
     get_participante, participantes_disponiveis, atualizar_sorteio,
-    editar_confraternizacao, get_confraternizacao, quem_tirou
+    editar_confraternizacao, get_confraternizacao, quem_tirou, existe_sorteio_realizado
 )
 import random
 
@@ -51,17 +51,21 @@ def sorteio(pid):
     p = get_participante(pid)
     cid = p["confraternizacao_id"]
 
-    total = len(listar_participantes(cid))
-
     if p["ja_sorteou"]:
         return render_template("sorteio.html", participante=p, amigo=None, cid=cid)
 
     disponiveis = participantes_disponiveis(cid, pid)
 
-    if total % 2 == 1:
-       pessoa_que_tirou_ele = quem_tirou(pid)
-       if pessoa_que_tirou_ele:
-           disponiveis = [d for d in disponiveis if d["id"] != pessoa_que_tirou_ele]
+    pessoa_que_tirou_ele = quem_tirou(pid)
+
+    if pessoa_que_tirou_ele:
+        disponiveis_ids = {d["id"] for d in disponiveis}
+
+        if pessoa_que_tirou_ele in disponiveis_ids:
+            disponiveis = [
+                d for d in disponiveis 
+                if d["id"] != pessoa_que_tirou_ele
+            ]
 
     if len(disponiveis) == 0:
         return render_template(
@@ -76,5 +80,6 @@ def sorteio(pid):
     atualizar_sorteio(pid, amigo["id"])
 
     return render_template("sorteio.html", participante=p, amigo=amigo, cid=cid)
+
 
 
