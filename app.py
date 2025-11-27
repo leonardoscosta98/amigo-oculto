@@ -56,16 +56,10 @@ def sorteio(pid):
 
     disponiveis = participantes_disponiveis(cid, pid)
 
-    pessoa_que_tirou_ele = quem_tirou(pid)
-
-    if pessoa_que_tirou_ele:
-        disponiveis_ids = {d["id"] for d in disponiveis}
-
-        if pessoa_que_tirou_ele in disponiveis_ids:
-            disponiveis = [
-                d for d in disponiveis 
-                if d["id"] != pessoa_que_tirou_ele
-            ]
+    if disponiveis % 2 == 1:
+       pessoa_que_tirou_ele = quem_tirou(pid)
+       if pessoa_que_tirou_ele:
+           disponiveis = [d for d in disponiveis if d["id"] != pessoa_que_tirou_ele]
 
     if len(disponiveis) == 0:
         return render_template(
