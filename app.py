@@ -56,7 +56,7 @@ def sorteio(pid):
 
     disponiveis = participantes_disponiveis(cid, pid)
 
-    if disponiveis % 2 == 1:
+    if len(disponiveis) % 2 == 1:
        pessoa_que_tirou_ele = quem_tirou(pid)
        if pessoa_que_tirou_ele:
            disponiveis = [d for d in disponiveis if d["id"] != pessoa_que_tirou_ele]
