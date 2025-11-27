@@ -51,14 +51,17 @@ def sorteio(pid):
     p = get_participante(pid)
     cid = p["confraternizacao_id"]
 
+    total = len(listar_participantes(cid))
+
     if p["ja_sorteou"]:
         return render_template("sorteio.html", participante=p, amigo=None, cid=cid)
 
     disponiveis = participantes_disponiveis(cid, pid)
 
-    pessoa_que_tirou_ele = quem_tirou(pid)
-    if pessoa_que_tirou_ele:
-        disponiveis = [d for d in disponiveis if d["id"] != pessoa_que_tirou_ele]
+     if total % 2 == 1:
+        pessoa_que_tirou_ele = quem_tirou(pid)
+        if pessoa_que_tirou_ele:
+            disponiveis = [d for d in disponiveis if d["id"] != pessoa_que_tirou_ele]
 
     if len(disponiveis) == 0:
         return render_template(
