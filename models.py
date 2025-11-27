@@ -101,4 +101,19 @@ def quem_tirou(pid):
     conn.close()
     return row["id"] if row else None
 
+def existe_sorteio_realizado(cid):
+    conn = get_conn()
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT 1 
+        FROM participantes
+        WHERE confraternizacao_id = %s
+          AND ja_sorteou = TRUE
+        LIMIT 1
+    """, (cid,))
+    result = cur.fetchone()
+    conn.close()
+    return result is not None
+
+
 
